@@ -51,9 +51,6 @@ export const signupController = async(req, res) => {
     }
 };
 
-
-
-
 export const loginController =async(req, res) => {     
   const { email, password } = req.body;
     try {
@@ -109,3 +106,8 @@ export const logoutController = (req, res) => {
   }           
   
 };
+
+
+export const updateProfileController = async(req, res) => {
+    
+}
