@@ -120,10 +120,24 @@ export const updateProfileController = async(req, res) => {
      const uploadResponse = await cloudinary.uploader.upload(profilePic);
       
      const updatedUser = await User.findByIdAndUpdate(userId, {profilePic: uploadResponse.secure_url}, {new: true});
-
+     
+     res.status(200).json(updatedUser);
 
     } catch (error) {
       console.log("error in update profile controller :" + error);
+      res.status(500).json({message: "Error in update profile controller"});
 
     }
 }
+
+
+export const checkAuthController = async(req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select('-password');
+    res.json(user);
+    
+  } catch (error) {
+    console.log("error in check auth controller :" + error);
+    res.status(500).json({message: "Error in check auth controller"});
+  }
+};
