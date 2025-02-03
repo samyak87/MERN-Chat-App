@@ -19,12 +19,17 @@ export const useAuthStore = create((set) => ({
         } catch (error) {
             set({authUser : null});
             console.log("Error in checking auth " + error);
-            
+          
             
         }
         finally{
             set({isCheckingAuth : false});
+            
         }
+    },
+
+    signup : async(data) =>{
+
     }
     
 }))
