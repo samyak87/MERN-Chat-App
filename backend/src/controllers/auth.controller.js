@@ -117,10 +117,18 @@ export const updateProfileController = async(req, res) => {
         return res.status(400).json({message: "Profile picture is required"});
       }
 
-     const uploadResponse = await cloudinary.uploader.upload(profilePic);
-      
-     const updatedUser = await User.findByIdAndUpdate(userId, {profilePic: uploadResponse.secure_url}, {new: true});
-     
+      const uploadResponse = await cloudinary.uploader.upload(profilePic, {
+        resource_type: "auto", // Automatically detect file type (supports large files)
+        chunk_size: 6000000,   // 6MB chunks for large files
+        folder: "profile_pictures", // Optional: Organize uploads
+    });
+    
+    const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { profilePic: uploadResponse.secure_url },
+        { new: true }
+    );
+         
      res.status(200).json(updatedUser);
 
     } catch (error) {
