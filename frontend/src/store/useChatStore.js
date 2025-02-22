@@ -6,7 +6,7 @@ export const useChatStore = create((set) => ({
     messages : [],
     users : [],
     selectedUser : null,
-    isUserLoading : false,
+    isUserLoading : false, 
     isMessagesLoading : false,
 
 
@@ -35,7 +35,6 @@ export const useChatStore = create((set) => ({
             set({isMessagesLoading : false});
         }
     },
-    setSelectedUser : (userId) =>{
-        
-    };
+    setSelectedUser : (selectedUser) => set({selectedUser}),
+    
 }));
